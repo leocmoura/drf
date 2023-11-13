@@ -1,10 +1,16 @@
+import json
 from django.http import JsonResponse
 
 def api_home(request, *args, **kwargs):
-    header = request.headers
+    # request -> HttpRequest -> Django
+    # print(dir(request))
+    # request.body
     body = request.body
-    print(header)
-    print('------------------------')
-    print(body)
-    return JsonResponse({'message': 'hello view'})
+    data = {}
+    try:
+        data = json.loads(body)
+    except:
+        pass
+    print(data)
+    return JsonResponse(data)
     
